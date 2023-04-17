@@ -90,3 +90,46 @@ input[type="file"] {
 .sketch-picker > div:nth-child(3) {
   display: none !important;
 }
+
+.capture {
+	height: 100%;
+	width: 100%;
+	max-width: 100%;
+}
+#loading.display {
+	display: block;
+}
+#mainLoading {
+	display: block;
+	left: 68%;
+	width: 4rem;
+	height: 4rem;
+	border: 8px solid rgb(209, 215, 222);
+	border-top: 8px solid rgb(55, 66, 75);
+
+}
+@media screen and (max-width: 768px) {
+ #mainLoading {
+  left: 50%;
+  top: 65%;
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid rgb(209, 215, 222);
+  border-top: 4px solid rgb(55, 66, 75);
+ }
+}
+#mainLoading.disabled {
+	display: none;
+}
+#mainLoading.customizer {
+	left: 50%;
+	transition: all 0.5s linear;
+	
+}
+
+@media screen and (max-width: 767px) {
+  #mainLoading {
+    top: 50%;
+  }
+ 
+}

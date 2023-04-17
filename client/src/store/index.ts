@@ -1,13 +1,14 @@
 import type{ WritableDraft } from 'immer/dist/types/types-external';
+import { ColorModelString, HexColorString } from 'three';
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
-
+import { persist, createJSONStorage } from 'zustand/middleware'
 
 const defaultState = {
-    intro: true,
+    intro: false,
 	color: 'rgb(55, 66, 75)',
-	isLogoTexture: true,
-	isFullTexture: false,
+	isLogoTexture: false,
+	isFullTexture: true,
 	logoDecal: './images/default.png',
 	fullDecal: './images/default.png',
 }
@@ -21,12 +22,15 @@ interface IGlobalState extends IGlobalBaseState{
 }
 
 export const useGlobalStore = create(
-  immer<IGlobalState>((set) => ({
+  persist(immer<IGlobalState>((set) => ({
     ...defaultState,
     updateBykey: (key,newState) =>
       set((state) => {
             (state[key] as any) =newState;
         
       }),
-  }))
+  })),{
+    name: 'food-storage', // unique name
+   
+  }) 
 )

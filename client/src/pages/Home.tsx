@@ -33,15 +33,20 @@ export const Home = () => {
               className="flex flex-col gap-5"
             >
               <p className="max-w-md font-normal text-gray-600 text-base">
-              我们全新推出的3D定制工具，能够让你DIY出独一无二、只属于你的衬衫！😍😍
-              <br className="xl:block hidden" />
-              这款工具简直是一场独特创作的释放，让你的创作无限可能！🔥🔥
-              <br className="xl:block hidden" />
-              你可以尽情发挥，定义你自己的风格，定制你想要的唯一的衣服！😎😎
-              <br className="xl:block hidden" />
              
-                用我们的 <strong>3D定制工具</strong>，尽情释放你的创意和想象力吧！🤩🤩
+              这款工具简直是一场独特创作的释放，让你的创作无限可能！🔥🔥
               </p>
+              <p className="max-w-md font-normal text-gray-600 text-base">
+              你可以尽情发挥，定义你自己的风格，定制你想要的唯一的衣服！😎😎
+              </p>
+          
+              <p className="max-w-md font-normal text-gray-600 text-base">
+              用我们的 <strong>3D定制工具</strong>，尽情释放你的创意和想象力吧！🤩🤩
+              </p>
+             
+             
+           
+              
               <CustomButton
                 type="filled"
                 title="开启你的DIY梦想"
