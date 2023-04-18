@@ -25,7 +25,7 @@ export const CanvasModel = () => {
         <Environment preset="city" />
         <CameraRig>
           <Backdrop />
-          <Center right={!!intro}>
+          <Center >
             <Shirt />
           </Center>
         </CameraRig>
