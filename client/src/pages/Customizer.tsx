@@ -8,6 +8,7 @@ import { Tab } from "../components/Tab";
 import ColorPicker from "../components/ColorPicker";
 import { FilePicker } from "../components/FilePicker";
 import { reader } from "../config/helpers";
+import { AIPicker } from "../components/AIPicker";
 export const Customizer = () => {
   const {intro,updateBykey,isLogoTexture,isFullTexture} = useGlobalStore();
   const [activeEditorTab, setActiveEditorTab] = useState('');
@@ -17,6 +18,8 @@ export const Customizer = () => {
   })
   
 	const [file, setFile] = useState('');
+  const [generatingImg, setGeneratingImg] = useState(false);
+  const [prompt, setPrompt] = useState('');
   const toggleEditorTab = (tabName:string)=>{
     switch (tabName) {
 			case 'colorpicker':
@@ -42,6 +45,36 @@ export const Customizer = () => {
 				break;
 		}
 
+  }
+  const handleSubmit = async (type:DecalTypeKeys) => {
+    if(!prompt) return alert("Please enter a prompt");
+
+    try {
+      setGeneratingImg(true);
+
+      const response = await fetch('http://localhost:8080/api/v1/dalle', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          prompt,
+        })
+      })
+
+      const data = await response.json();
+      if(!data.photo){
+        return 
+      }
+      console.log('%cCustomizer.tsx line:66 data', 'color: #007acc;', data);
+
+      handleDecals(type, `data:image/png;base64,${data.photo}`)
+    } catch (error) {
+      alert(error)
+    } finally {
+      setGeneratingImg(false);
+      setActiveEditorTab("");
+    }
   }
 
 
@@ -105,15 +138,15 @@ export const Customizer = () => {
 			case 'filepicker':
 				return <FilePicker file={file} setFile={setFile} readFile={readFile} />;
 
-			// case 'aipicker':
-			// 	return (
-			// 		<AIPicker
-			// 			prompt={prompt}
-			// 			setPrompt={setPrompt}
-			// 			generatingImg={generatingImg}
-			// 			handleSubmit={handleSubmit}
-			// 		/>
-			// 	);
+			case 'aipicker':
+				return (
+					<AIPicker
+						prompt={prompt}
+						setPrompt={setPrompt}
+						generatingImg={generatingImg}
+						handleSubmit={handleSubmit}
+					/>
+				);
 
 			default:
 				return null;
