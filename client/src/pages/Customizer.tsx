@@ -9,6 +9,7 @@ import ColorPicker from "../components/ColorPicker";
 import { FilePicker } from "../components/FilePicker";
 import { reader } from "../config/helpers";
 import { AIPicker } from "../components/AIPicker";
+import { apiConfig } from "../config/config";
 export const Customizer = () => {
   const {intro,updateBykey,isLogoTexture,isFullTexture} = useGlobalStore();
   const [activeEditorTab, setActiveEditorTab] = useState('');
@@ -52,7 +53,7 @@ export const Customizer = () => {
     try {
       setGeneratingImg(true);
 
-      const response = await fetch('http://localhost:8080/api/v1/dalle', {
+      const response = await fetch(apiConfig.production.backendUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

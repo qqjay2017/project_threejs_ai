@@ -22,15 +22,12 @@ interface IGlobalState extends IGlobalBaseState{
 }
 
 export const useGlobalStore = create(
-  persist(immer<IGlobalState>((set) => ({
+  immer<IGlobalState>((set) => ({
     ...defaultState,
     updateBykey: (key,newState) =>
       set((state) => {
             (state[key] as any) =newState;
         
       }),
-  })),{
-    name: 'food-storage', // unique name
-   
-  }) 
+  }))
 )
